@@ -51,13 +51,14 @@ This is a simulation-only study with three seeds per configuration. See the repo
 
 **Reward** (per step, scaled by the control timestep):
 
-    ```math
-    r = 8\,e^{-\lVert \mathbf{v}^{cmd}_{xy}-\mathbf{v}_{xy}\rVert^2/0.05}
-      + 6\,e^{-(\omega^{cmd}_z-\omega_z)^2/0.03}
-      - 2.5\times 10^{-5}\lVert\ddot{\mathbf{q}}\rVert^2
-      - 0.02\lVert\Delta\mathbf{a}\rVert^2
-      - 0.01\lVert\mathbf{q}-\mathbf{q}_0\rVert^2
-      - 5\lVert\mathbf{g}_{xy}\rVert^2
+  $$
+  r = 8\,e^{-\lVert \mathbf{v}^{cmd}_{xy}-\mathbf{v}_{xy}\rVert^2/0.05}
+    + 6\,e^{-(\omega^{cmd}_z-\omega_z)^2/0.03}
+    - 2.5\times 10^{-5}\lVert\ddot{\mathbf{q}}\rVert^2
+    - 0.02\lVert\Delta\mathbf{a}\rVert^2
+    - 0.01\lVert\mathbf{q}-\mathbf{q}_0\rVert^2
+    - 5\lVert\mathbf{g}_{xy}\rVert^2
+  $$
     
 The terms reward velocity tracking and penalize joint acceleration, action rate, deviation from the default pose and body tilt. Falling gives a terminal penalty of $-200$.
 
