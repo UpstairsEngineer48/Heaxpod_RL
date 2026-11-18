@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Training logs, checkpoints and TensorBoard events
+# (archived separately on Zenodo; unzip into logs/exp/ to reproduce eval)
+logs/
+
+# Run output
+*.out
+*.log
+post.log
+
+# Machine-specific symlink to the robot meshes (see README)
+meshes
+
+# Paper drafts (add the final PDF explicitly if wanted)
+paper/*.docx
+~$*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store

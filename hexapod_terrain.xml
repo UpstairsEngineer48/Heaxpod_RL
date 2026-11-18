@@ -1,0 +1,185 @@
+<mujoco model="hexapod">
+  <compiler angle="radian" meshdir="meshes/"/>
+
+  <option timestep="0.004"/>
+
+  <size nkey="1"/>
+
+  <asset><hfield name="terrain" nrow="481" ncol="481" size="6.0 6.0 1 0.1"/>
+    <mesh name="Base" file="Base.STL"/>
+    <mesh name="Coxa_1" file="Coxa_1.STL"/>
+    <mesh name="Femur_1" file="Femur_1.STL"/>
+    <mesh name="Tibia_1" file="Tibia_1.STL"/>
+    <mesh name="Coxa_2" file="Coxa_2.STL"/>
+    <mesh name="Femur_2" file="Femur_2.STL"/>
+    <mesh name="Tibia_2" file="Tibia_2.STL"/>
+    <mesh name="Coxa_3" file="Coxa_3.STL"/>
+    <mesh name="Femur_3" file="Femur_3.STL"/>
+    <mesh name="Tibia_3" file="Tibia_3.STL"/>
+    <mesh name="Coxa_4" file="Coxa_4.STL"/>
+    <mesh name="Femur_4" file="Femur_4.STL"/>
+    <mesh name="Tibia_4" file="Tibia_4.STL"/>
+    <mesh name="Coxa_5" file="Coxa_5.STL"/>
+    <mesh name="Femur_5" file="Femur_5.STL"/>
+    <mesh name="Tibia_5" file="Tibia_5.STL"/>
+    <mesh name="Coxa_6" file="Coxa_6.STL"/>
+    <mesh name="Femur_6" file="Femur_6.STL"/>
+    <mesh name="Tibia_6" file="Tibia_6.STL"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" type="hfield" hfield="terrain" contype="0" conaffinity="1"/>
+    <body name="Base">
+      <inertial pos="3.17138e-06 -3.3118e-06 0.0185997" quat="0.499998 0.500002 -0.499998 0.500002" mass="0.516034" diaginertia="0.00226054 0.00150228 0.000814452"/>
+      <joint name="root" type="free"/>
+      <geom type="mesh" conaffinity="0" group="1" density="0" rgba="0.15 0.15 0.15 1" mesh="Base"/>
+      <geom type="mesh" contype="0" conaffinity="0" rgba="0.15 0.15 0.15 1" mesh="Base"/>
+      <site name="imu" pos="0 0 0.0186" size="0.01"/>
+      <body name="Coxa_1" pos="0.067149 0.11215 0.05285" quat="0.270073 0.270074 0.6535 0.653497">
+        <inertial pos="0.000577862 -0.0317728 0.0354243" quat="0.859898 0.217209 -0.332447 0.320739" mass="0.058207" diaginertia="2.41646e-05 2.03554e-05 1.68516e-05"/>
+        <joint name="Joint1_1" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_1"/>
+        <geom type="mesh" contype="0" conaffinity="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_1"/>
+        <body name="Femur_1" pos="-0.03075 -0.03075 0.07" quat="0.707105 0 0 0.707108">
+          <inertial pos="0.00548415 -0.0355182 0.0386098" quat="0.997467 -1.43e-06 0.0711316 -2.00526e-05" mass="0.107129" diaginertia="5.25899e-05 4.90723e-05 1.6022e-05"/>
+          <joint name="Joint1_2" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.45 0.05 1" mesh="Femur_1"/>
+          <geom type="mesh" contype="0" conaffinity="0" rgba="0.85 0.45 0.05 1" mesh="Femur_1"/>
+          <body name="Tibia_1" pos="0.011069 -0.00075 0.077211" quat="0.887983 0 -0.459876 0">
+            <inertial pos="-0.013868 -0.032455 0.0624085" quat="0.950754 -0.0244911 -0.281022 0.12843" mass="0.0754192" diaginertia="0.000106653 0.000101416 2.36529e-05"/>
+            <joint name="Joint1_3" pos="0 0 0" axis="0 -1 0" range="-2 0.5" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.05 0.05 0.05 1" mesh="Tibia_1"/>
+            <geom size="0.012" pos="-0.0716 -0.0404 0.1549" conaffinity="0"/>
+            <site name="foot1" pos="-0.0716 -0.0404 0.1549" size="0.012"/>
+          </body>
+        </body>
+      </body>
+      <body name="Coxa_2" pos="0.08925 0 0.05285" quat="0.492366 0.492368 0.507519 0.507517">
+        <inertial pos="0.000577862 -0.0317728 0.0354243" quat="0.859898 0.217209 -0.332447 0.320739" mass="0.058207" diaginertia="2.41646e-05 2.03554e-05 1.68516e-05"/>
+        <joint name="Joint2_1" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_2"/>
+        <geom type="mesh" contype="0" conaffinity="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_2"/>
+        <body name="Femur_2" pos="-0.03075 -0.03075 0.07" quat="0.707105 0 0 0.707108">
+          <inertial pos="0.0142167 -0.0347682 0.0363194" quat="0.982769 3.71542e-06 0.184837 1.97547e-05" mass="0.107129" diaginertia="5.25899e-05 4.90723e-05 1.6022e-05"/>
+          <joint name="Joint2_2" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.45 0.05 1" mesh="Femur_2"/>
+          <geom type="mesh" contype="0" conaffinity="0" rgba="0.85 0.45 0.05 1" mesh="Femur_2"/>
+          <body name="Tibia_2" pos="0.028338 0.00075 0.07267" quat="0.921826 0 -0.387603 0">
+            <inertial pos="-0.0138678 -0.032455 0.0624082" quat="0.950752 -0.0244923 -0.281024 0.128434" mass="0.0754195" diaginertia="0.000106655 0.000101419 2.36529e-05"/>
+            <joint name="Joint2_3" pos="0 0 0" axis="0 -1 0" range="-2 0.5" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.05 0.05 0.05 1" mesh="Tibia_2"/>
+            <geom size="0.012" pos="-0.0716 -0.0404 0.1549" conaffinity="0"/>
+            <site name="foot2" pos="-0.0716 -0.0404 0.1549" size="0.012"/>
+          </body>
+        </body>
+      </body>
+      <body name="Coxa_3" pos="0.067149 -0.11215 0.05585" quat="0.651265 0.651268 0.275413 0.275412">
+        <inertial pos="0.000577862 -0.0317728 0.0354243" quat="0.859898 0.217209 -0.332447 0.320739" mass="0.058207" diaginertia="2.41646e-05 2.03554e-05 1.68516e-05"/>
+        <joint name="Joint3_1" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_3"/>
+        <geom type="mesh" contype="0" conaffinity="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_3"/>
+        <body name="Femur_3" pos="-0.03075 -0.03075 0.07" quat="0.707105 0 0 0.707108">
+          <inertial pos="0.0124923 -0.0347682 0.036948" quat="0.986846 3.24951e-06 0.161662 1.98363e-05" mass="0.107129" diaginertia="5.25899e-05 4.90723e-05 1.6022e-05"/>
+          <joint name="Joint3_2" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.45 0.05 1" mesh="Femur_3"/>
+          <geom type="mesh" contype="0" conaffinity="0" rgba="0.85 0.45 0.05 1" mesh="Femur_3"/>
+          <body name="Tibia_3" pos="0.024888 0.00075 0.073923" quat="0.921826 0 -0.387603 0">
+            <inertial pos="-0.0138681 -0.032455 0.0624085" quat="0.950753 -0.0244917 -0.281022 0.128432" mass="0.0754192" diaginertia="0.000106653 0.000101416 2.36529e-05"/>
+            <joint name="Joint3_3" pos="0 0 0" axis="0 -1 0" range="-2 0.5" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.05 0.05 0.05 1" mesh="Tibia_3"/>
+            <geom size="0.012" pos="-0.0716 -0.0404 0.1549" conaffinity="0"/>
+            <site name="foot3" pos="-0.0716 -0.0404 0.1549" size="0.012"/>
+          </body>
+        </body>
+      </body>
+      <body name="Coxa_4" pos="-0.067149 -0.11215 0.05285" quat="0.658329 0.658331 -0.258073 -0.258072">
+        <inertial pos="0.000577862 -0.0317728 0.0354243" quat="0.859898 0.217209 -0.332447 0.320739" mass="0.058207" diaginertia="2.41646e-05 2.03554e-05 1.68516e-05"/>
+        <joint name="Joint4_1" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_4"/>
+        <geom type="mesh" contype="0" conaffinity="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_4"/>
+        <body name="Femur_4" pos="-0.03075 -0.03075 0.07" quat="0.707105 0 0 0.707108">
+          <inertial pos="0.010625 -0.0347682 0.0375276" quat="0.990588 2.75125e-06 0.136876 1.99111e-05" mass="0.107129" diaginertia="5.25899e-05 4.90723e-05 1.6022e-05"/>
+          <joint name="Joint4_2" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.45 0.05 1" mesh="Femur_4"/>
+          <geom type="mesh" contype="0" conaffinity="0" rgba="0.85 0.45 0.05 1" mesh="Femur_4"/>
+          <body name="Tibia_4" pos="0.021152 0.00075 0.075077" quat="0.855904 0 -0.517135 0">
+            <inertial pos="-0.0138677 -0.032455 0.0624081" quat="0.950754 -0.0244911 -0.281022 0.12843" mass="0.0754193" diaginertia="0.000106653 0.000101416 2.36529e-05"/>
+            <joint name="Joint4_3" pos="0 0 0" axis="0 -1 0" range="-2 0.5" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.05 0.05 0.05 1" mesh="Tibia_4"/>
+            <geom size="0.012" pos="-0.0716 -0.0404 0.1549" conaffinity="0"/>
+            <site name="foot4" pos="-0.0716 -0.0404 0.1549" size="0.012"/>
+          </body>
+        </body>
+      </body>
+      <body name="Coxa_5" pos="-0.08925 0 0.05285" quat="0.498872 0.498874 -0.501126 -0.501124">
+        <inertial pos="0.000577862 -0.0317728 0.0354243" quat="0.859898 0.217209 -0.332447 0.320739" mass="0.058207" diaginertia="2.41646e-05 2.03554e-05 1.68516e-05"/>
+        <joint name="Joint5_1" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_5"/>
+        <geom type="mesh" contype="0" conaffinity="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_5"/>
+        <body name="Femur_5" pos="-0.03075 -0.03075 0.07" quat="0.707105 0 0 0.707108">
+          <inertial pos="0.00789662 -0.0347682 0.0381895" quat="0.994742 -2.05878e-06 0.102414 -1.99968e-05" mass="0.107129" diaginertia="5.25899e-05 4.90723e-05 1.6022e-05"/>
+          <joint name="Joint5_2" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.45 0.05 1" mesh="Femur_5"/>
+          <geom type="mesh" contype="0" conaffinity="0" rgba="0.85 0.45 0.05 1" mesh="Femur_5"/>
+          <body name="Tibia_5" pos="0.015893 0 0.076364" quat="0.921826 0 -0.387603 0">
+            <inertial pos="-0.0138678 -0.032455 0.0624082" quat="0.950752 -0.0244923 -0.281024 0.128434" mass="0.0754195" diaginertia="0.000106655 0.000101419 2.36529e-05"/>
+            <joint name="Joint5_3" pos="0 0 0" axis="0 -1 0" range="-2 0.5" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.05 0.05 0.05 1" mesh="Tibia_5"/>
+            <geom size="0.012" pos="-0.0716 -0.0404 0.1549" conaffinity="0"/>
+            <site name="foot5" pos="-0.0716 -0.0404 0.1549" size="0.012"/>
+          </body>
+        </body>
+      </body>
+      <body name="Coxa_6" pos="-0.067149 0.11215 0.05285" quat="0.221489 0.22149 -0.671524 -0.671521">
+        <inertial pos="0.000577862 -0.0317728 0.0354243" quat="0.859898 0.217209 -0.332447 0.320739" mass="0.058207" diaginertia="2.41646e-05 2.03554e-05 1.68516e-05"/>
+        <joint name="Joint6_1" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+        <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_6"/>
+        <geom type="mesh" contype="0" conaffinity="0" rgba="0.1 0.35 0.75 1" mesh="Coxa_6"/>
+        <body name="Femur_6" pos="-0.03075 -0.03075 0.07" quat="0.707105 0 0 0.707108">
+          <inertial pos="0.00675395 -0.0355182 0.0384081" quat="0.996159 -1.76003e-06 0.0875649 -2.00225e-05" mass="0.107129" diaginertia="5.25899e-05 4.90723e-05 1.6022e-05"/>
+          <joint name="Joint6_2" pos="0 0 0" axis="0 -1 0" range="-1.5708 1.5708" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+          <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.85 0.45 0.05 1" mesh="Femur_6"/>
+          <geom type="mesh" contype="0" conaffinity="0" rgba="0.85 0.45 0.05 1" mesh="Femur_6"/>
+          <body name="Tibia_6" pos="0.013608 -0.00075 0.076804" quat="0.836737 0 -0.547606 0">
+            <inertial pos="-0.0138677 -0.032455 0.0624081" quat="0.950753 -0.0244914 -0.281023 0.128433" mass="0.0754193" diaginertia="0.000106654 0.000101418 2.36529e-05"/>
+            <joint name="Joint6_3" pos="0 0 0" axis="0 -1 0" range="-2 0.5" actuatorfrcrange="-5 5" armature="0.01" damping="0.5"/>
+            <geom type="mesh" contype="0" conaffinity="0" group="1" density="0" rgba="0.05 0.05 0.05 1" mesh="Tibia_6"/>
+            <geom size="0.012" pos="-0.0716 -0.0404 0.1549" conaffinity="0"/>
+            <site name="foot6" pos="-0.0716 -0.0404 0.1549" size="0.012"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="Joint1_1" joint="Joint1_1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint1_2" joint="Joint1_2" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint1_3" joint="Joint1_3" ctrllimited="true" ctrlrange="-2 0.5" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint2_1" joint="Joint2_1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint2_2" joint="Joint2_2" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint2_3" joint="Joint2_3" ctrllimited="true" ctrlrange="-2 0.5" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint3_1" joint="Joint3_1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint3_2" joint="Joint3_2" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint3_3" joint="Joint3_3" ctrllimited="true" ctrlrange="-2 0.5" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint4_1" joint="Joint4_1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint4_2" joint="Joint4_2" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint4_3" joint="Joint4_3" ctrllimited="true" ctrlrange="-2 0.5" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint5_1" joint="Joint5_1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint5_2" joint="Joint5_2" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint5_3" joint="Joint5_3" ctrllimited="true" ctrlrange="-2 0.5" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint6_1" joint="Joint6_1" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint6_2" joint="Joint6_2" ctrllimited="true" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+    <general name="Joint6_3" joint="Joint6_3" ctrllimited="true" ctrlrange="-2 0.5" forcelimited="true" forcerange="-5 5" biastype="affine" gainprm="20" biasprm="0 -20"/>
+  </actuator>
+
+  <sensor>
+    <gyro site="imu" name="gyro"/>
+    <accelerometer site="imu" name="acc"/>
+    <framequat objtype="site" objname="imu" name="quat"/>
+  </sensor>
+
+  <keyframe>
+    <key name="home" qpos="0 0 0.151902 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"/>
+  </keyframe>
+</mujoco>

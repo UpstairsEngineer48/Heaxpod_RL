@@ -1,0 +1,11 @@
+run,ckpt,terrain,friction,lin_frac,falls_per_ep,exits_per_ep
+full_s0,model_799.pt,flat,train,0.8946,0.0,0.1562
+full_s0,model_799.pt,pebbles,train,0.8728,0.0,0.2031
+full_s0,model_799.pt,rocks,train,0.8403,0.0,0.1641
+full_s0,model_799.pt,slopes,train,0.8251,0.0,0.1875
+full_s0,model_799.pt,mixed,train,0.8304,0.0,0.1875
+full_s0,model_799.pt,mixed_new,train,0.8576,0.0,0.2266
+full_s0,model_799.pt,mixed,0.3,0.7974,0.0,0.2188
+full_s0,model_799.pt,mixed,0.6,0.8408,0.0,0.2266
+full_s0,model_799.pt,mixed,1.0,0.8142,0.0,0.1406
+full_s0,model_799.pt,mixed,1.6,0.765,0.0,0.1719
