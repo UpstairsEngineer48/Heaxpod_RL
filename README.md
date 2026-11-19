@@ -45,11 +45,11 @@ This is a simulation-only study with three seeds per configuration. See the repo
 
 **Observation (63 values):** angular velocity (3), projected gravity (3), command (3), joint position offsets (18), joint velocities (18), previous action (18).
 
-**Action (18 values):** joint position offsets added to the standing pose, scaled by `0.2` and clipped to $[-1, 1]$ rad.
+**Action (18 values):** joint position offsets added to the standing pose, scaled by `0.2` and clipped to $[-1, 1]$ rad. The policy acts every 16 ms (4 physics steps of 4 ms), and an episode lasts 20 s.
 
 **Commands** are resampled every 10 s: $v_x, v_y \in [-0.4, 0.4]$ m/s and $\omega_z \in [-0.8, 0.8]$ rad/s.
 
-**Reward** (per step, scaled by the control timestep):
+**Reward** (per step, every term scaled by the control timestep $\Delta t = 16$ ms):
 
   $$
   r = 8\,e^{-\lVert \mathbf{v}^{cmd}_{xy}-\mathbf{v}_{xy}\rVert^2/0.05}
@@ -59,10 +59,10 @@ This is a simulation-only study with three seeds per configuration. See the repo
     - 0.01\lVert\mathbf{q}-\mathbf{q}_0\rVert^2
     - 5\lVert\mathbf{g}_{xy}\rVert^2
   $$
-    
-The terms reward velocity tracking and penalize joint acceleration, action rate, deviation from the default pose and body tilt. Falling gives a terminal penalty of $-200$.
 
-**Terrain:** a $12\times12$ m heightfield made of $3\times3$ m patches. Each patch is randomly flat, small pebbles, larger rocks, or a pyramid hill (3 to 12 degrees).
+The terms reward velocity tracking and penalize joint acceleration, action rate, deviation from the default pose, body tilt and falling. Because the fall penalty is scaled by $\Delta t$ as well, one fall costs $200 \times 0.016 = 3.2$ reward units.
+
+**Terrain:** a $12\times12$ m heightfield made of $3\times3$ m patches. Each patch is randomly flat (30%), small pebbles (25%), larger rocks (25%), or a pyramid hill (20%, 3 to 12 degrees). Training uses one fixed map.
 
 **Randomization:** ground friction in $[0.4, 1.25]$, a random push of up to $0.3$ m/s every 4 s, a one-step action delay in half of the episodes, and Gaussian noise on angular velocity, projected gravity, joint positions and joint velocities.
 
@@ -75,6 +75,7 @@ hexa_mj/
 ├── expcfg.py            # ablation configurations (full, flat, nofric, nopush, nodelay, nonoise)
 ├── train.py             # training (config overrides with --set key=value)
 ├── run_all.sh           # trains all 6 configurations x 3 seeds
+├── post.sh              # helper: waits for run_all.sh, then runs eval.py and aggregate.py
 ├── eval.py              # paired evaluation under 24 test conditions
 ├── aggregate.py         # tables and figures for the standard / stress conditions
 ├── aggregate_hard.py    # tables for the harder combined-stress conditions
@@ -95,10 +96,10 @@ hexa_mj/
 ## Requirements
 
 - Linux with an NVIDIA GPU (the code uses `cuda:0`)
-- Python 3.12
+- Python 3.10 or newer
 - `mujoco`, `mujoco_warp`, `warp-lang`, `torch`, `tensordict`, `rsl-rl-lib`
 
-Install these following the instructions of each project (MuJoCo Warp in particular has its own GPU requirements).
+The results in the report were produced with Python 3.10.12, MuJoCo 3.9.0 and PyTorch 2.3.0 on an NVIDIA GeForce RTX 4050 Laptop GPU (6 GB). Install the packages following the instructions of each project (MuJoCo Warp in particular has its own GPU requirements).
 
 ## Robot model
 
@@ -106,9 +107,9 @@ The robot's STL meshes come from the robot's ROS 2 description package (`hexa_de
 
 ## Trained policies
 
-The 18 trained policies (6 configurations x 3 seeds: checkpoints, configs and TensorBoard logs) are archived on Zenodo: **DOI to be added when the report is final.**
+The 18 trained policies (6 configurations x 3 seeds: checkpoints, configs and TensorBoard logs) are not stored in this repo, because `logs/` is git-ignored. They will be archived on Zenodo once the report is final. Until then, train them yourself with `./run_all.sh` (see below).
 
-To use them, download the archive and unzip it so the folders end up in `logs/exp/`, for example `logs/exp/full_s0/model_799.pt`.
+Each run is saved in `logs/exp/<cfg>_s<seed>/`, for example `logs/exp/full_s0/model_799.pt`.
 
 ## Usage
 
@@ -122,12 +123,12 @@ python3 play.py --view --cmd 0 0.3 0 -c logs/exp/full_s0/model_799.pt   # fixed 
 python3 play.py -c logs/exp/full_s0/model_799.pt                        # headless test of 6 commands, prints tracking and falls
 ```
 
-Without `-c`, the newest checkpoint in `logs/hexa/` is loaded.
+Always pass the checkpoint with `-c`. Without it, `play.py` and `teleop.py` look for checkpoints in `logs/hexa/`, which the current `train.py` no longer writes to.
 
 **Drive it with the keyboard**
 
 ```bash
-python3 teleop.py
+python3 teleop.py -c logs/exp/full_s0/model_799.pt
 ```
 
 Type in the terminal you launched it from:
@@ -145,12 +146,13 @@ The robot walks while a key is held and stands still when you let go. Noise, ran
 **Train a single policy**
 
 ```bash
-python3 train.py                                # default configuration
-python3 train.py -e 4096 -i 3000                # more envs / iterations
-python3 train.py -r logs/hexa/<run>/model_1000.pt   # resume
+python3 train.py                                   # default: config "full", seed 0 -> logs/exp/full_s0/
+python3 train.py -n nodelay -s 1 --set pdl=0.0     # a named ablation run with seed 1
+python3 train.py -e 4096 -i 3000                   # more envs / iterations
+python3 train.py -r logs/exp/full_s0/model_500.pt  # resume
 ```
 
-Checkpoints are saved every 50 iterations, with TensorBoard logs. Any configuration value can be overridden on the command line with `--set key=value`.
+Checkpoints are saved every 50 iterations, with TensorBoard logs. Any configuration value can be overridden on the command line with `--set key=value`. The overrides used for the ablations are listed in `run_all.sh`.
 
 **Reproduce the ablation study**
 
@@ -162,7 +164,7 @@ python3 aggregate.py results/eval.csv            # tables and figures
 python3 aggregate_hard.py results/eval_hard.csv
 ```
 
-If you downloaded the Zenodo archive into `logs/exp/`, you can skip `run_all.sh` and go straight to evaluation.
+`eval.py` evaluates the final checkpoint (`model_799.pt`) of every run.
 
 **Export the policy**
 
@@ -187,4 +189,5 @@ python3 mk_terrain.py hexapod.xml hexapod_terrain.xml
 - `hexapod_terrain.xml` expects the STL files in `meshes/` next to it.
 
 ## Author
-UpstairsEngineer48· [GitHub](https://github.com/UpstairsEngineer48) · [LinkedIn](https://www.linkedin.com/in/pranjal-pandey-ug48/)
+
+Pranjal Pandey (UpstairsEngineer48) · [GitHub](https://github.com/UpstairsEngineer48) · [LinkedIn](https://www.linkedin.com/in/pranjal-pandey-ug48/)
