@@ -190,4 +190,4 @@ python3 mk_terrain.py hexapod.xml hexapod_terrain.xml
 
 ## Author
 
-Pranjal Pandey (UpstairsEngineer48) · [GitHub](https://github.com/UpstairsEngineer48) · [LinkedIn](https://www.linkedin.com/in/pranjal-pandey-ug48/)
+UpstairsEngineer48 · [GitHub](https://github.com/UpstairsEngineer48) · [LinkedIn](https://www.linkedin.com/in/pranjal-pandey-ug48/)
